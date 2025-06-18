@@ -16,10 +16,14 @@ import java.util.List;
 public class CarController {
 
     @GetMapping("/cars")
-    public String showCar(@RequestParam("count") int count, ModelMap model) {
+    public String showCar(@RequestParam(required = false) Integer count, ModelMap model) {
         List<String> messages = new ArrayList<>();
-        CarServiceImpl carDaoImpl = new CarServiceImpl();
-        messages.add(carDaoImpl.getCarsService(count).toString());
+        CarServiceImpl carServiceImpl = new CarServiceImpl();
+        if (count == null) {
+            messages.add(carServiceImpl.getCarsService(5).toString());
+        } else {
+            messages.add(carServiceImpl.getCarsService(count).toString());
+        }
         model.addAttribute("messages", messages);
         return "cars";
     }
