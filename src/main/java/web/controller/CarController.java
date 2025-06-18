@@ -15,10 +15,11 @@ public class CarController {
     @GetMapping("/cars")
     public String showCar(@RequestParam(required = false) Integer count, Model model) {
         List<Car> res = new ArrayList<>();
-        if (count != null && count > 0 && count < 5) {
-            CarServiceImpl carService = new CarServiceImpl();
+        CarServiceImpl carService = new CarServiceImpl();
+        if (count == null) {
+            res = carService.getCarsService(5);
+        } else {
             res = carService.getCarsService(count);
-            System.out.println(res.toString());
         }
         model.addAttribute("cars", res);
         return "cars";

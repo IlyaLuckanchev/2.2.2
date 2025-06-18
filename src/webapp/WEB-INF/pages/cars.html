@@ -4,40 +4,60 @@
     <meta charset="UTF-8">
     <title>Car List</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
         table {
             border-collapse: collapse;
-            width: 50%;
+            width: 80%;
             margin: 20px auto;
         }
         th, td {
             border: 1px solid #dddddd;
             text-align: left;
-            padding: 8px;
+            padding: 12px;
         }
         th {
             background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
         }
         tr:nth-child(even) {
             background-color: #f9f9f9;
+        }
+        .debug {
+            color: red;
+            margin: 20px;
+            padding: 10px;
+            border: 1px dashed red;
         }
     </style>
 </head>
 <body>
 <h1 style="text-align: center;">Car List</h1>
 
-<table>
+<!-- Отладочная информация -->
+<div class="debug" th:if="${cars == null}">
+    WARNING: Cars list is NULL!
+</div>
+<div class="debug" th:if="${cars != null and cars.empty}">
+    WARNING: Cars list is EMPTY!
+</div>
+
+<table th:if="${cars != null and not cars.empty}">
     <thead>
     <tr>
         <th>Brand</th>
         <th>Color</th>
-        <th>Price</th>
+        <th>Price ($)</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="car : ${cars}">
-        <td th:text="${car.brand}"></td>
-        <td th:text="${car.color}"></td>
-        <td th:text="${car.price}"></td>
+        <td th:text="${car.brand}">Brand</td>
+        <td th:text="${car.color}">Color</td>
+        <td th:text="${car.price}">Price</td>
     </tr>
     </tbody>
 </table>
@@ -45,8 +65,6 @@
 <div style="text-align: center; margin-top: 20px;">
     <a th:href="@{/cars(count=2)}">Show 2 cars</a> |
     <a th:href="@{/cars(count=3)}">Show 3 cars</a> |
-    <a th:href="@{/cars(count=4)}">Show 4 cars</a> |
-    <a th:href="@{/cars(count=5)}">Show 5 cars</a> |
     <a th:href="@{/cars}">Show all cars</a>
 </div>
 </body>
