@@ -17,6 +17,8 @@ public class Car {
         this.price = price;
     }
 
+
+
     public String getModel() {
         return model;
     }
@@ -39,5 +41,13 @@ public class Car {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
