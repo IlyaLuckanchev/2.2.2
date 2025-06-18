@@ -1,9 +1,13 @@
 package web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import web.dao.CarDaoImpl;
 import web.model.Car;
+import web.service.CarServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +16,10 @@ import java.util.List;
 public class CarController {
 
     @GetMapping("/cars")
-    public String getCars(ModelMap model) {
-        Car car1 = new Car("BMW", "black", 5000);
-        Car car2 = new Car("Mercedes", "white", 8000);
-        Car car3 = new Car("Audi", "silver", 9000);
-        Car car4 = new Car("Mazda", "green", 4000);
-        Car car5 = new Car("Nissan", "pink", 2000);
-
+    public String showCar(@RequestParam("count") int count, ModelMap model) {
         List<String> messages = new ArrayList<>();
-        messages.add(car1.getModel() + car1.getColor() + " " + car1.getPrice());
+        CarServiceImpl carDaoImpl = new CarServiceImpl();
+        messages.add(carDaoImpl.getCarsService(count).toString());
         model.addAttribute("messages", messages);
         return "cars";
     }
