@@ -1,11 +1,12 @@
 package web.dao;
+
 import web.model.Car;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class CarDaoImpl implements CarDao{
+public class CarDaoImpl implements CarDao {
     public List<Car> addCar() {
         return new ArrayList<>(List.of(
                 new Car("BMW", "black", 5000),
