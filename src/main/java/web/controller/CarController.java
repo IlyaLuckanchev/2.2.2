@@ -13,15 +13,8 @@ import java.util.List;
 public class CarController {
 
     @GetMapping("/cars")
-    public String showCar(@RequestParam(required = false) Integer count, Model model) {
-        List<Car> res = new ArrayList<>();
-        CarServiceImpl carService = new CarServiceImpl();
-        if (count == null) {
-            res = carService.getCarsService(5);
-        } else {
-            res = carService.getCarsService(count);
-        }
-        model.addAttribute("cars", res);
+    public String showCar(@RequestParam(required = false) Integer count, Model model, CarServiceImpl carServiceImpl) {
+        model.addAttribute("cars", carServiceImpl.getCarsService(count));
         return "cars";
     }
 }

@@ -15,9 +15,12 @@ public class CarDaoImpl implements CarDao{
                 new Car("Nissan", "pink", 2000)));
     }
 
-
     @Override
-    public List<Car> getCars(int count) {
-        return addCar().stream().limit(count).collect(Collectors.toList());
+    public List<Car> getCars(Integer count) {
+        if (count == null) {
+            return new ArrayList<>(addCar());
+        } else {
+            return addCar().stream().limit(count).collect(Collectors.toList());
+        }
     }
 }
